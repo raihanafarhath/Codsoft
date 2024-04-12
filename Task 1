@@ -1,0 +1,17 @@
+tasks = []
+def add_task(task):
+    tasks.append(task)
+def view_tasks():
+    print("To-Do List:")
+    for index, task in enumerate(tasks, start=1):
+        print(f"{index}. {task}")
+def update_task(index, new_task):
+    tasks[index - 1] = new_task
+def delete_task(index):
+    del tasks[index - 1]
+add_task("Complete project")
+add_task("Buy groceries")
+view_tasks()
+update_task(2, "Buy vegetables")
+delete_task(1)
+view_tasks()
