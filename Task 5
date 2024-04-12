@@ -1,0 +1,87 @@
+contacts = []
+
+def add_contact(name, phone_number, email, address):
+    contact = {
+        'name': name,
+        'phone_number': phone_number,
+        'email': email,
+        'address': address
+    }
+    contacts.append(contact)
+
+def view_contact_list():
+    print("Contact List:")
+    for index, contact in enumerate(contacts, start=1):
+        print(f"{index}. Name: {contact['name']}, Phone: {contact['phone_number']}")
+
+def search_contact(query):
+    results = []
+    for contact in contacts:
+        if query.lower() in contact['name'].lower() or query in contact['phone_number']:
+            results.append(contact)
+    return results
+def update_contact(index, name, phone_number, email, address):
+    if index >= 0 and index < len(contacts):
+        contacts[index]['name'] = name
+        contacts[index]['phone_number'] = phone_number
+        contacts[index]['email'] = email
+        contacts[index]['address'] = address
+        print("Contact updated successfully.")
+    else:
+        print("Invalid index.")
+
+def delete_contact(index):
+    if index >= 0 and index < len(contacts):
+        del contacts[index]
+        print("Contact deleted successfully.")
+    else:
+        print("Invalid index.")
+def main():
+    while True:
+        print("\nContact Management System")
+        print("-------------------------")
+        print("1. Add Contact")
+        print("2. View Contact List")
+        print("3. Search Contact")
+        print("4. Update Contact")
+        print("5. Delete Contact")
+        print("6. Exit")
+        choice = input("Enter your choice: ")
+        if choice == '1':
+            name = input("Enter name: ")
+            phone_number = input("Enter phone number: ")
+            email = input("Enter email: ")
+            address = input("Enter address: ")
+            add_contact(name, phone_number, email, address)
+            print("Contact added successfully.")
+        elif choice == '2':
+            view_contact_list()
+        elif choice == '3':
+            query = input("Enter name or phone number to search: ")
+            results = search_contact(query)
+            if results:
+                print("Search results:")
+                for contact in results:
+                    print(f"Name: {contact['name']}, Phone: {contact['phone_number']}")
+            else:
+                print("No matching contacts found.")
+        elif choice == '4':
+            index = int(input("Enter index of contact to update: "))
+            if 0 <= index < len(contacts):
+                name = input("Enter new name: ")
+                phone_number = input("Enter new phone number: ")
+                email = input("Enter new email: ")
+                address = input("Enter new address: ")
+                update_contact(index, name, phone_number, email, address)
+            else:
+                print("Invalid index.")
+        elif choice == '5':
+            index = int(input("Enter index of contact to delete: "))
+            delete_contact(index)
+        elif choice == '6':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+if __name__ == "__main__":
+    main()
